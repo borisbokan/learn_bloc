@@ -1,23 +1,24 @@
-import 'package:lear_bloc/models/offered.dart';
+import 'package:lear_bloc/models/offer.dart';
 
-abstract class OfferedEvent {}
+abstract class OffersEvent {}
 
-final class InitOfferEvent extends OfferedEvent {
-  final int skip;
-  InitOfferEvent({this.skip = 0});
+final class InitOfferEvent extends OffersEvent {
+  int skip;
+  List<Offer> initOffers = [];
+  InitOfferEvent({this.skip = 0, List<Offer>? initOffers});
 }
 
-final class FetchNextOffersEvent extends OfferedEvent {
-  final int skip;
-  FetchNextOffersEvent({required this.skip});
+final class FetchOffersEvent extends OffersEvent {
+  int skip;
+  FetchOffersEvent({required this.skip});
 }
 
-final class RemoveOfferedEvent extends OfferedEvent {
-  final Offered offered;
-  RemoveOfferedEvent({required this.offered});
+final class RemoveOfferEvent extends OffersEvent {
+  Offer offer;
+  RemoveOfferEvent({required this.offer});
 }
 
-final class AddOfferedEvent extends OfferedEvent {
-  final Offered offered;
-  AddOfferedEvent({required this.offered});
+final class AddOfferEvent extends OffersEvent {
+  Offer offer;
+  AddOfferEvent({required this.offer});
 }

@@ -1,4 +1,0 @@
-enum ServiceParticipantEnum {
-  SINGLE,
-  MULTIPLE,
-}
