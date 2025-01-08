@@ -1,0 +1,4 @@
+enum ServiceParticipantEnum {
+  SINGLE,
+  MULTIPLE,
+}
