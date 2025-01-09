@@ -10,7 +10,8 @@ final class InitOfferEvent extends OffersEvent {
 
 final class FetchOffersEvent extends OffersEvent {
   int skip;
-  FetchOffersEvent({required this.skip});
+  List<Offer> initOffers = [];
+  FetchOffersEvent({required this.skip, List<Offer>? initOffers});
 }
 
 final class RemoveOfferEvent extends OffersEvent {

@@ -10,6 +10,11 @@ class BlocOffers extends Bloc<OffersEvent, StateOffers> {
       (_fetchoffers),
     );
 
+    on<FetchOffersEvent>((FetchOffersEvent event, Emitter<StateOffers> emit) {
+      emit(
+          StateOffers(listOffers: [...state.listOffers!, ...event.initOffers]));
+    });
+
     on<AddOfferEvent>(
       (AddOfferEvent addOfferEvent, Emitter<StateOffers> emit) {
         final newState = state.listOffers;

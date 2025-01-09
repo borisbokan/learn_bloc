@@ -12,7 +12,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => BlocOffers()..add(InitOfferEvent()),
       child: MaterialApp(
+        debugShowCheckedModeBanner: true,
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -47,7 +48,27 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.small(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          context.read<BlocOffers>().add(AddOfferEvent(
+              offer: Offer(
+                  id: "tt7",
+                  title: "New offer",
+                  description: "descr new offer")));
+        },
+      ),
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () async {
+                context.read<BlocOffers>().add(
+                      FetchOffersEvent(
+                          skip: 10, initOffers: await _fetchoffers()),
+                    );
+              },
+              icon: const Icon(Icons.refresh_rounded))
+        ],
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
@@ -68,6 +89,11 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       }),
     );
+  }
+
+  Future<List<Offer>?> _fetchoffers() async {
+    List<Offer>? _offers = await DbOffersMock.fetchOffers();
+    return _offers;
   }
 }
 
