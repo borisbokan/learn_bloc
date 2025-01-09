@@ -62,9 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
               onPressed: () async {
+                var offers = await _fetchoffers();
+
                 context.read<BlocOffers>().add(
-                      FetchOffersEvent(
-                          skip: 10, initOffers: await _fetchoffers()),
+                      FetchOffersEvent(skip: 10, offers: offers!),
                     );
               },
               icon: const Icon(Icons.refresh_rounded))
